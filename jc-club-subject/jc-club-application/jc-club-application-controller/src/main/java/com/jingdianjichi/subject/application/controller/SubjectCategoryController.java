@@ -20,8 +20,6 @@ import java.util.Locale.Category;
 /**
  * 刷题分类controller
  *
- * @author: ChickenWing
- * @date: 2023/10/1
  */
 @RestController
 @RequestMapping("/subject/category")
