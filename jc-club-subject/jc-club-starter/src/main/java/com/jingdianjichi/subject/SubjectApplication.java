@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @ComponentScan("com.jingdianjichi")
-@MapperScan("com.jingdianjichi.**.mapper")
+@MapperScan({"com.jingdianjichi.**.mapper","com.jingdianjichi.**.dao"})
 public class SubjectApplication {
 
     public static void main(String[] args) {
