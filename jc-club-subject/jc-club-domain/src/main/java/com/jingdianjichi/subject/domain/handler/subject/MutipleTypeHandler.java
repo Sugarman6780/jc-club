@@ -1,9 +1,21 @@
 package com.jingdianjichi.subject.domain.handler.subject;
 
+import com.jingdianjichi.subject.common.enums.IsDeletedFlagEnum;
 import com.jingdianjichi.subject.common.enums.SubjectInfoTypeEnum;
+import com.jingdianjichi.subject.domain.convert.MutipleSubjectConverter;
 import com.jingdianjichi.subject.domain.entity.SubjectInfoBO;
+import com.jingdianjichi.subject.infra.basic.entity.SubjectMultiple;
+import com.jingdianjichi.subject.infra.basic.service.SubjectMultipleService;
+
+import javax.annotation.Resource;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MutipleTypeHandler implements SubjectTypeHandler {
+
+    @Resource
+    private SubjectMultipleService subjectMultipleService;
+
     @Override
     public SubjectInfoTypeEnum getHandlerType() {
         return SubjectInfoTypeEnum.MULTIPLE;
@@ -11,6 +23,13 @@ public class MutipleTypeHandler implements SubjectTypeHandler {
 
     @Override
     public void add(SubjectInfoBO subjectInfoBO) {
-        
+        List<SubjectMultiple> subjectMultipleList = new LinkedList<>();
+        subjectInfoBO.getOptionList().forEach(option->{
+            SubjectMultiple subjectMultiple = MutipleSubjectConverter.INSTANCE.convertBoToEntity(option);
+            subjectMultiple.setSubjectId(subjectInfoBO.getId());
+            subjectMultiple.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
+            subjectMultipleList.add(subjectMultiple);
+        });
+        subjectMultipleService.batchInsert(subjectMultipleList);
     }
 }

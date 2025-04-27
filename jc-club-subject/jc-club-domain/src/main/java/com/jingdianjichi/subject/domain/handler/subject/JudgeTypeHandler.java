@@ -1,9 +1,19 @@
 package com.jingdianjichi.subject.domain.handler.subject;
 
+import com.jingdianjichi.subject.common.enums.IsDeletedFlagEnum;
 import com.jingdianjichi.subject.common.enums.SubjectInfoTypeEnum;
+import com.jingdianjichi.subject.domain.entity.SubjectAnswerBO;
 import com.jingdianjichi.subject.domain.entity.SubjectInfoBO;
+import com.jingdianjichi.subject.infra.basic.entity.SubjectJudge;
+import com.jingdianjichi.subject.infra.basic.service.SubjectJudgeService;
+
+import javax.annotation.Resource;
 
 public class JudgeTypeHandler implements SubjectTypeHandler {
+
+    @Resource
+    private SubjectJudgeService subjectJudgeService;
+
     @Override
     public SubjectInfoTypeEnum getHandlerType() {
         return SubjectInfoTypeEnum.JUDGE;
@@ -11,6 +21,11 @@ public class JudgeTypeHandler implements SubjectTypeHandler {
 
     @Override
     public void add(SubjectInfoBO subjectInfoBO) {
-        
+        SubjectJudge subjectJudge = new SubjectJudge();
+        SubjectAnswerBO subjectAnswerBO = subjectInfoBO.getOptionList().get(0);
+        subjectJudge.setSubjectId(subjectInfoBO.getId());
+        subjectJudge.setIsCorrect(subjectAnswerBO.getIsCorrect());
+        subjectJudge.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
+        subjectJudgeService.insert(subjectJudge);
     }
 }

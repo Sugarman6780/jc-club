@@ -38,9 +38,8 @@ public class SubjectJudgeServiceImpl implements SubjectJudgeService {
      * @return 实例对象
      */
     @Override
-    public SubjectJudge insert(SubjectJudge subjectJudge) {
+    public void insert(SubjectJudge subjectJudge) {
         this.subjectJudgeDao.insert(subjectJudge);
-        return subjectJudge;
     }
 
     /**

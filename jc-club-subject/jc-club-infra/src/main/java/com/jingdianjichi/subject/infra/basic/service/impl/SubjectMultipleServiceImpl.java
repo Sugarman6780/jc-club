@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 多选题信息表(SubjectMultiple)表服务实现类
@@ -42,6 +43,11 @@ public class SubjectMultipleServiceImpl implements SubjectMultipleService {
     public SubjectMultiple insert(SubjectMultiple subjectMultiple) {
         this.subjectMultipleDao.insert(subjectMultiple);
         return subjectMultiple;
+    }
+
+    @Override
+    public void batchInsert(List<SubjectMultiple> subjectMultipleList) {
+        this.subjectMultipleDao.insertBatch(subjectMultipleList);
     }
 
     /**

@@ -28,6 +28,8 @@ public interface SubjectMappingService {
      */
     SubjectMapping insert(SubjectMapping subjectMapping);
 
+    void batchInsert(List<SubjectMapping> subjectMappingList);
+
     /**
      * 修改数据
      *

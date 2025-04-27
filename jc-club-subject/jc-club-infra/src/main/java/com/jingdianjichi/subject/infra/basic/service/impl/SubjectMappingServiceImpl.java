@@ -42,6 +42,11 @@ public class SubjectMappingServiceImpl implements SubjectMappingService {
         return subjectMapping;
     }
 
+    @Override
+    public void batchInsert(List<SubjectMapping> subjectMappingList) {
+        this.subjectMappingDao.insertBatch(subjectMappingList);
+    }
+
     /**
      * 修改数据
      *
