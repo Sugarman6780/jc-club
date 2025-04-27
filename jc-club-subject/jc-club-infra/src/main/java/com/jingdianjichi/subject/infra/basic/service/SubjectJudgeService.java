@@ -1,8 +1,7 @@
 package com.jingdianjichi.subject.infra.basic.service;
 
 import com.jingdianjichi.subject.infra.basic.entity.SubjectJudge;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
 
 /**
  * 判断题(SubjectJudge)表服务接口

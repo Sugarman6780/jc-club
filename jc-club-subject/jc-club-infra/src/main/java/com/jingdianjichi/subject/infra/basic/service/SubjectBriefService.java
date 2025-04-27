@@ -1,8 +1,7 @@
 package com.jingdianjichi.subject.infra.basic.service;
 
 import com.jingdianjichi.subject.infra.basic.entity.SubjectBrief;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
 
 /**
  * 简答题(SubjectBrief)表服务接口

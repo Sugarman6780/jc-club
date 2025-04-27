@@ -1,8 +1,7 @@
 package com.jingdianjichi.subject.infra.basic.service;
 
 import com.jingdianjichi.subject.infra.basic.entity.SubjectMultiple;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
 
 /**
  * 多选题信息表(SubjectMultiple)表服务接口

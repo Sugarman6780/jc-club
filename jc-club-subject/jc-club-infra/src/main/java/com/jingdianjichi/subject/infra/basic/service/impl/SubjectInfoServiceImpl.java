@@ -4,9 +4,7 @@ import com.jingdianjichi.subject.infra.basic.entity.SubjectInfo;
 import com.jingdianjichi.subject.infra.basic.dao.SubjectInfoDao;
 import com.jingdianjichi.subject.infra.basic.service.SubjectInfoService;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+
 
 import javax.annotation.Resource;
 
