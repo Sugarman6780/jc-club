@@ -78,5 +78,6 @@ public interface SubjectJudgeDao {
      */
     int deleteById(Long id);
 
+    SubjectJudge queryByCondition(@Param("subjectId") int subjectId);
 }
 

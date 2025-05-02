@@ -1,6 +1,9 @@
 package com.jingdianjichi.subject.infra.basic.service;
 
 import com.jingdianjichi.subject.infra.basic.entity.SubjectInfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 /**
@@ -43,5 +46,9 @@ public interface SubjectInfoService {
      * @return 是否成功
      */
     boolean deleteById(Long id);
+
+    int countByCondition(SubjectInfo subjectInfo, Integer categoryId, Integer labelId);
+
+    List<SubjectInfo> queryPage(SubjectInfo subjectInfo, Integer pageSize, int start, Integer categoryId, Integer labelId);
 
 }

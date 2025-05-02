@@ -79,5 +79,6 @@ public interface SubjectRadioDao {
      */
     int deleteById(Long id);
 
+    List<SubjectRadio> queryByCondition(@Param("subjectId") Long subjectId);
 }
 

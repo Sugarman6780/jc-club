@@ -78,5 +78,6 @@ public interface SubjectMultipleDao {
      */
     int deleteById(Long id);
 
+    List<SubjectMultiple> queryByCondition(@Param("subjectId") int subjectId);
 }
 

@@ -1,5 +1,6 @@
 package com.jingdianjichi.subject.infra.basic.service;
 
+import com.jingdianjichi.subject.infra.basic.entity.SubjectLabel;
 import com.jingdianjichi.subject.infra.basic.entity.SubjectRadio;
 
 import java.util.List;
@@ -54,4 +55,6 @@ public interface SubjectRadioService {
      */
     boolean deleteById(Long id);
 
+
+    List<SubjectRadio> queryByCondition(Long subjectId);
 }

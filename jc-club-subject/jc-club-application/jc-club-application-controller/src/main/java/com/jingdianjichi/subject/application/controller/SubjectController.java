@@ -7,12 +7,14 @@ import com.jingdianjichi.subject.application.convert.SubjectCategoryDTOConverter
 import com.jingdianjichi.subject.application.convert.SubjectInfoDTOConverter;
 import com.jingdianjichi.subject.application.dto.SubjectCategoryDTO;
 import com.jingdianjichi.subject.application.dto.SubjectInfoDTO;
+import com.jingdianjichi.subject.common.entity.PageResult;
 import com.jingdianjichi.subject.common.entity.Result;
 import com.jingdianjichi.subject.domain.entity.SubjectAnswerBO;
 import com.jingdianjichi.subject.domain.entity.SubjectCategoryBO;
 import com.jingdianjichi.subject.domain.entity.SubjectInfoBO;
 import com.jingdianjichi.subject.domain.service.SubjectInfoDomainService;
 import com.jingdianjichi.subject.infra.basic.entity.SubjectCategory;
+import com.jingdianjichi.subject.infra.basic.entity.SubjectInfo;
 import com.jingdianjichi.subject.infra.basic.service.SubjectCategoryService;
 import com.jingdianjichi.subject.infra.basic.service.SubjectInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -59,10 +61,44 @@ public class SubjectController {
             return Result.ok(true);
         }catch (Exception e){
             log.error("SubjectCategoryController.add.error:{}",e.getMessage(),e);
+            return Result.fail("新增题目失败");
+        }
+    }
+
+
+    @PostMapping("/getSubjectPage")
+    public Result<PageResult<SubjectInfoDTO>> getSubjectPage(@RequestBody SubjectInfoDTO subjectInfoDTO){
+        try {
+            if(log.isInfoEnabled()){
+                log.info("SubjectController.getSubjectPage.dto:{}", JSON.toJSONString(subjectInfoDTO));
+            }
+            Preconditions.checkNotNull(subjectInfoDTO.getCategoryId(), "分类id不能为空");
+            Preconditions.checkNotNull(subjectInfoDTO.getLabelId(), "标签id不能为空");
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.convertInfoDTOToBo(subjectInfoDTO);
+            PageResult<SubjectInfoBO> boPageResult = subjectInfoDomainService.getSubjectPage(subjectInfoBO);
+            return Result.ok(boPageResult);
+        }catch (Exception e){
+            log.error("SubjectCategoryController.getSubjectPage.error:{}",e.getMessage(),e);
             return Result.fail(e.getMessage());
         }
     }
 
 
+    @PostMapping("/querySubjectInfo")
+    public Result<SubjectInfoDTO> querySubjectInfo(@RequestBody SubjectInfoDTO subjectInfoDTO){
+        try {
+            if(log.isInfoEnabled()){
+                log.info("SubjectController.getSubjectPage.dto:{}", JSON.toJSONString(subjectInfoDTO));
+            }
+            Preconditions.checkNotNull(subjectInfoDTO.getId(), "题目id不能为空");
+            SubjectInfoBO subjectInfoBO = SubjectInfoDTOConverter.INSTANCE.convertInfoDTOToBo(subjectInfoDTO);
+            SubjectInfoBO boResult= subjectInfoDomainService.querySubjectInfo(subjectInfoBO);
+            SubjectInfoDTO dto = SubjectInfoDTOConverter.INSTANCE.convertInfoBoToDTO(boResult);
+            return Result.ok(dto);
+        }catch (Exception e){
+            log.error("SubjectCategoryController.querySubjectInfo.error:{}",e.getMessage(),e);
+            return Result.fail(e.getMessage());
+        }
+    }
 
 }

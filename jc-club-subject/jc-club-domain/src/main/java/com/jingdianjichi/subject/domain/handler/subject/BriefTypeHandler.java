@@ -4,11 +4,14 @@ import com.jingdianjichi.subject.common.enums.IsDeletedFlagEnum;
 import com.jingdianjichi.subject.common.enums.SubjectInfoTypeEnum;
 import com.jingdianjichi.subject.domain.convert.BriefSubjectConverter;
 import com.jingdianjichi.subject.domain.entity.SubjectInfoBO;
+import com.jingdianjichi.subject.domain.entity.SubjectOptionBO;
 import com.jingdianjichi.subject.infra.basic.entity.SubjectBrief;
 import com.jingdianjichi.subject.infra.basic.service.SubjectBriefService;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+@Component
 public class BriefTypeHandler implements SubjectTypeHandler {
 
     @Resource
@@ -25,6 +28,14 @@ public class BriefTypeHandler implements SubjectTypeHandler {
         subjectBrief.setSubjectId(subjectInfoBO.getId().intValue());
         subjectBrief.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         subjectBriefService.insert(subjectBrief);
+    }
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        SubjectBrief subjectBrief = subjectBriefService.queryById(Long.valueOf(subjectId));
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setSubjectAnswer(subjectBrief.getSubjectAnswer());
+        return subjectOptionBO;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.jingdianjichi.subject.domain.entity;
 
+import com.jingdianjichi.subject.common.entity.PageInfo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,7 +13,7 @@ import java.util.List;
  * @since 2025-04-25 15:30:26
  */
 @Data
-public class SubjectInfoBO implements Serializable {
+public class SubjectInfoBO extends PageInfo implements Serializable {
 
     /**
      * 主键
@@ -59,9 +60,17 @@ public class SubjectInfoBO implements Serializable {
     private List<Integer> LabelIds;
 
     /**
+     * 标签名
+     */
+    private List<String> labelName;
+
+    /**
      * 答案选项
      */
     private List<SubjectAnswerBO> optionList;
 
+    private Integer categoryId;
+
+    private Integer labelId;
 }
 

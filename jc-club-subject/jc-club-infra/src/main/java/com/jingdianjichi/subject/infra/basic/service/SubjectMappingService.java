@@ -1,6 +1,7 @@
 package com.jingdianjichi.subject.infra.basic.service;
 
 import com.jingdianjichi.subject.infra.basic.entity.SubjectMapping;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -47,4 +48,6 @@ public interface SubjectMappingService {
     boolean deleteById(Long id);
 
     List<SubjectMapping> queryLabelId(SubjectMapping subjectMapping);
+
+    List<SubjectMapping> queryBySubjectId(@Param("subjectId") Long subjectId);
 }

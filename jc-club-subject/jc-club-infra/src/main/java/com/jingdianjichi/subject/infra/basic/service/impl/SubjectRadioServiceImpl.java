@@ -71,4 +71,9 @@ public class SubjectRadioServiceImpl implements SubjectRadioService {
     public boolean deleteById(Long id) {
         return this.subjectRadioDao.deleteById(id) > 0;
     }
+
+    @Override
+    public List<SubjectRadio> queryByCondition(Long subjectId) {
+        return this.subjectRadioDao.queryByCondition(Long.valueOf(subjectId));
+    }
 }

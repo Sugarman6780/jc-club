@@ -4,11 +4,15 @@ import com.jingdianjichi.subject.common.enums.IsDeletedFlagEnum;
 import com.jingdianjichi.subject.common.enums.SubjectInfoTypeEnum;
 import com.jingdianjichi.subject.domain.entity.SubjectAnswerBO;
 import com.jingdianjichi.subject.domain.entity.SubjectInfoBO;
+import com.jingdianjichi.subject.domain.entity.SubjectOptionBO;
 import com.jingdianjichi.subject.infra.basic.entity.SubjectJudge;
 import com.jingdianjichi.subject.infra.basic.service.SubjectJudgeService;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
+@Component
 public class JudgeTypeHandler implements SubjectTypeHandler {
 
     @Resource
@@ -27,5 +31,13 @@ public class JudgeTypeHandler implements SubjectTypeHandler {
         subjectJudge.setIsCorrect(subjectAnswerBO.getIsCorrect());
         subjectJudge.setIsDeleted(IsDeletedFlagEnum.UN_DELETED.getCode());
         subjectJudgeService.insert(subjectJudge);
+    }
+
+    @Override
+    public SubjectOptionBO query(int subjectId) {
+        SubjectJudge subjectJudge = subjectJudgeService.queryByCondition(subjectId);
+        SubjectOptionBO subjectOptionBO = new SubjectOptionBO();
+        subjectOptionBO.setSubjectAnswer(Integer.toString(subjectJudge.getIsCorrect()));
+        return subjectOptionBO;
     }
 }
